@@ -8,4 +8,56 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="match_parent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="wrap_contents">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+</style>
+
+    <style name="width_match_height_wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="bake_card_style" parent="width_match_height_wrap">
+        <item name="android:layout_margin">@dimen/bakes_list_8dp_margin</item>
+    </style>
+
+    <style name="iv_pie_imageview" parent="wrap_contents">
+        <item name="android:layout_margin">@dimen/bakes_list_8dp_margin</item>
+        <item name="android:src">@drawable/ic_pie</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+    </style>
+
+    <style name="tv_bake_name" parent="wrap_contents">
+        <item name="android:paddingLeft">@dimen/bakes_list_8dp_margin</item>
+        <item name="android:layout_marginTop">@dimen/bakes_list_8dp_margin</item>
+        <item name="layout_constraintStart_toEndOf">@id/iv_pie_imageview</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">@dimen/bake_name_text_size</item>
+    </style>
+
+    <style name="bakes_extra_info" parent="wrap_contents">
+        <item name="android:paddingLeft">@dimen/bakes_list_8dp_margin</item>
+        <item name="layout_constraintStart_toEndOf">@id/iv_pie_imageview</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:textSize">@dimen/bakes_list_total_ingredients_text_size</item>
+    </style>
+
+    <style name="tv_total_ingredients" parent="bakes_extra_info">
+        <item name="android:paddingTop">@dimen/bakes_list_8dp_margin</item>
+        <item name="layout_constraintTop_toBottomOf">@id/tv_bake_name</item>
+    </style>
+
+    <style name="tv_total_steps" parent="bakes_extra_info">
+        <item name="layout_constraintTop_toBottomOf">@id/tv_total_ingredients</item>
+    </style>
+
 </resources>
