@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.aidan.bakingapp.Models.Bakes;
 import com.example.aidan.bakingapp.R;
 
 import java.util.List;
@@ -16,14 +18,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import timber.log.Timber;
 
 @SuppressWarnings("StringBufferReplaceableByString")
 public class BakesListAdapter extends RecyclerView.Adapter<BakesListAdapter.BakesListViewHolder> {
     private List<Bakes> bakesList;
     private Context context;
-
-    public BakesListAdapter(){}
 
     public BakesListAdapter(List<Bakes> bakesList) {
         this.bakesList = bakesList;
@@ -41,12 +40,11 @@ public class BakesListAdapter extends RecyclerView.Adapter<BakesListAdapter.Bake
     @Override
     public void onBindViewHolder(@NonNull BakesListViewHolder holder, int position) {
         Bakes bakes = bakesList.get(position);
-        holder.clContainer.setTag(bakes.getCakeId());
 
         holder.tvBakeName.setText(bakes.getBakeName());
 
-        String totalIngredients = new StringBuilder().append(context.getResources().getString(R.string.total_ingredients)).append("\t").append(bakes.getTotalIngredients()).toString();
-        holder.tvTotalIngredients.setText(totalIngredients);
+        String totalIngredients = new StringBuilder().append(context.getResources().getString(R.string.servings)).append("\t").append(bakes.getServings()).toString();
+        holder.tvServings.setText(totalIngredients);
 
         String totalSteps = new StringBuilder().append(context.getResources().getString(R.string.total_steps)).append("\t").append(bakes.getTotalSteps()).toString();
         holder.tvTotalSteps.setText(totalSteps);
@@ -72,10 +70,10 @@ public class BakesListAdapter extends RecyclerView.Adapter<BakesListAdapter.Bake
         ConstraintLayout clContainer;
         @BindView(R.id.tv_bake_name)
         TextView tvBakeName;
-        @BindView(R.id.tv_total_ingredients)
-        TextView tvTotalIngredients;
         @BindView(R.id.tv_total_steps)
         TextView tvTotalSteps;
+        @BindView(R.id.tv_servings)
+        TextView tvServings;
 
         BakesListViewHolder(View view) {
             super(view);
@@ -84,7 +82,8 @@ public class BakesListAdapter extends RecyclerView.Adapter<BakesListAdapter.Bake
 
         @OnClick(R.id.cl_container)
         public void openMoreDetailsActivity(){
-            Timber.e(clContainer.getTag().toString());
+            Bakes bakes = bakesList.get(getAdapterPosition());
+            Toast.makeText(context,bakes.getIngredientsList().toString(),Toast.LENGTH_SHORT).show();
         }
     }
 }

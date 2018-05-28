@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="bakes_list_8dp_margin">8dp</dimen>
-    <dimen name="bake_name_text_size">16sp</dimen>
-    <dimen name="bakes_list_total_ingredients_text_size">12sp</dimen>
+    <dimen name="bake_name_text_size">20sp</dimen>
+    <dimen name="bakes_list_total_ingredients_text_size">14sp</dimen>
 </resources>

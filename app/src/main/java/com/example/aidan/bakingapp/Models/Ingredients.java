@@ -1,4 +1,4 @@
-package com.example.aidan.bakingapp.Adapters;
+package com.example.aidan.bakingapp.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class Ingredients implements Parcelable {
     private int quantity;
     private String measure,ingredientName;
-    public Ingredients(){}
+
     public Ingredients(int quantity,String measure,String ingredientName){
         this.quantity = quantity;
         this.measure = measure;

@@ -4,4 +4,5 @@
     <string name="bake_name">Bake name</string>
     <string name="total_ingredients">Total Ingredients:</string>
     <string name="total_steps">Total steps:</string>
+    <string name="servings">Servings:</string>
 </resources>

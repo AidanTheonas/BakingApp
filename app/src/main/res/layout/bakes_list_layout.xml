@@ -17,14 +17,14 @@
         tools:text="Nutella Pie" />
 
     <TextView
-        android:id="@+id/tv_total_ingredients"
-        style="@style/tv_total_ingredients"
-        tools:text="@string/total_ingredients"/>
-
-    <TextView
         android:id="@+id/tv_total_steps"
        style="@style/tv_total_steps"
         tools:text="@string/total_steps"/>
+
+    <TextView
+        android:id="@+id/tv_servings"
+        style="@style/tv_servings"
+        tools:text="@string/servings"/>
 
 
 </android.support.constraint.ConstraintLayout>
