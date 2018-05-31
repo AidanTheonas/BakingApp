@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/match_parent"
     tools:context=".BakesDetailsActivity">
 
     <TextView
         android:id="@+id/tv_title_ingredients"
-        android:text="@string/ingredients"
-        style="@style/tv_title_ingredients" />
+        style="@style/tv_title_ingredients"
+        android:layout_marginTop="8dp"
+        android:text="@string/ingredients"/>
 
     <ImageView
         android:id="@+id/iv_next"
@@ -26,8 +26,8 @@
 
     <TextView
         android:id="@+id/tv_title_steps"
-        android:text="@string/steps"
-        style="@style/tv_title_steps" />
+        style="@style/tv_title_steps"
+        android:text="@string/steps"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_steps_list"

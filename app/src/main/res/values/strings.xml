@@ -19,4 +19,6 @@
     <string name="ingredients">Ingredients</string>
     <string name="steps">Steps</string>
     <string name="show_next_ingredient">Show next ingredient</string>
+    <string name="step">Step</string>
+    <string name="video_not_available">Video not available!</string>
 </resources>

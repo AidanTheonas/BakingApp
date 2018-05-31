@@ -121,29 +121,58 @@
 
     <style name="rv_steps_list" parent="rv_bakes_details">
         <item name="layout_constraintTop_toBottomOf">@id/tv_title_steps</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="android:layout_height">@dimen/rv_steps_list_layout_height</item>
+        <item name="android:layout_marginBottom">@dimen/rv_steps_list_padding_bottom</item>
     </style>
 
-    <style name="tv_ingredient" parent="width_match_height_wrap">
+    <style name="tv_right_desc" parent="width_match_height_wrap">
         <item name="android:padding">@dimen/ingredient_tv_padding</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
         <item name="android:textSize">@dimen/tv_ingredient_text_size</item>
         <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">gravity</item>
         <item name="android:gravity">center_vertical|start</item>
-        <item name="android:layout_toRightOf">@id/tv_measure_quantity</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
 
-    <style name="tv_measure_quantity" parent="wrap_contents">
+    <style name="tv_right_desc_title" parent="width_match_height_wrap">
+        <item name="android:paddingLeft">@dimen/ingredient_tv_padding</item>
+        <item name="android:paddingRight">@dimen/ingredient_tv_padding</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:textSize">@dimen/tv_desc_title_text_size</item>
+        <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">gravity</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:layout_toRightOf">@id/tv_step_icon</item>
+    </style>
+
+    <style name="tv_ingredient" parent="tv_right_desc">
+        <item name="android:layout_toRightOf">@id/tv_measure_quantity</item>
+    </style>
+
+    <style name="tv_step_desc" parent="tv_right_desc">
+        <item name="android:layout_toRightOf">@id/tv_step_icon</item>
+        <item name="android:layout_below">@id/tv_right_desc_title</item>
+    </style>
+
+    <style name="tv_left_desc" parent="wrap_contents">
         <item name="android:padding">@dimen/tv_measure_quantity_padding</item>
         <item name="android:textColor">@color/colorTextIcons</item>
         <item name="android:background">@color/colorAccent</item>
         <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">gravity</item>
         <item name="android:gravity">center</item>
-        <item name="android:drawableTop">@drawable/ic_ingredient</item>
         <item name="android:drawablePadding">@dimen/tv_measure_quantity_drawable_padding</item>
         <item name="android:textSize">@dimen/tv_measure_quantity_text_size</item>
         <item name="android:textStyle">bold</item>
+    </style>
+    <style name="tv_measure_quantity" parent="tv_left_desc">
+        <item name="android:drawableTop">@drawable/ic_ingredient</item>
         <item name="android:minWidth">@dimen/tv_measure_quantity_min_width</item>
+    </style>
+
+    <style name="tv_step_icon" parent="tv_left_desc">
+        <item name="android:drawableTop">@drawable/ic_video</item>
+        <item name="android:background">@color/colorTextIcons</item>
     </style>
 
 </resources>

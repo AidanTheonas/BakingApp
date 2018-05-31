@@ -1,6 +1,7 @@
 package com.example.aidan.bakingapp.Helpers;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 
 import com.example.aidan.bakingapp.R;
 
@@ -76,5 +77,13 @@ public class Helpers {
                 break;
         }
         return measureString;
+    }
+
+    public static int getStepIcon(String videoURL){
+        int stepIcon = R.drawable.ic_no_video;
+        if(!videoURL.trim().equals("")){
+            stepIcon = R.drawable.ic_video;
+        }
+        return stepIcon;
     }
 }

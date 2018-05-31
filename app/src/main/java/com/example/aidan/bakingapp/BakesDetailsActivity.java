@@ -1,20 +1,18 @@
 package com.example.aidan.bakingapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.aidan.bakingapp.Adapters.IngredientsListAdapter;
 import com.example.aidan.bakingapp.Adapters.StepsListAdapter;
 import com.example.aidan.bakingapp.Models.Bakes;
 import com.example.aidan.bakingapp.Models.Ingredients;
+import com.example.aidan.bakingapp.Models.Steps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,10 +50,15 @@ public class BakesDetailsActivity extends AppCompatActivity {
         ingredientsListAdapter = new IngredientsListAdapter(ingredientsList);
         rvIngredientsList.setAdapter(ingredientsListAdapter);
 
+        List<Steps> stepsList = new ArrayList<>();
+        stepsListAdapter = new StepsListAdapter(stepsList);
+        rvStepsList.setAdapter(stepsListAdapter);
+
         Intent intent = getIntent();
         if(intent.hasExtra(BAKES_EXTRA)){
             bakes = intent.getParcelableExtra(BAKES_EXTRA);
             generateIngredientsList(bakes.getIngredientsList());
+            generateStepsList(bakes.getStepsList());
             if(getSupportActionBar() != null) {
                 getSupportActionBar().setTitle(bakes.getBakeName());
                 getSupportActionBar().setElevation(0);
@@ -92,5 +95,13 @@ public class BakesDetailsActivity extends AppCompatActivity {
         ingredientsListAdapter = new IngredientsListAdapter(ingredientsList);
         rvIngredientsList.setLayoutManager(lmIngredientsLayout);
         rvIngredientsList.setAdapter(ingredientsListAdapter);
+    }
+
+    void generateStepsList(List<Steps> stepsList){
+        LinearLayoutManager lmStepsLayout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        stepsListAdapter = new StepsListAdapter(stepsList);
+        rvStepsList.setLayoutManager(lmStepsLayout);
+        rvStepsList.setAdapter(stepsListAdapter);
+        rvStepsList.setHasFixedSize(true);
     }
 }

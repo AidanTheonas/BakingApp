@@ -79,7 +79,6 @@ public class IngredientsListAdapter extends RecyclerView.Adapter<IngredientsList
         IngredientsListViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            getAdapterPosition();
         }
     }
 }

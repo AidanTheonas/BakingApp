@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/bakes_list_8dp_margin"
+    android:id="@+id/cv_steps"
+    style="@style/width_match_height_wrap">
+
+    <RelativeLayout
+        style="@style/width_match_height_wrap">
+        <TextView
+            android:id="@+id/tv_step_icon"
+            style="@style/tv_step_icon"/>
+        
+        <TextView
+            android:id="@+id/tv_right_desc_title"
+            tools:text="Description title"
+            style="@style/tv_right_desc_title"/>
+
+        <TextView
+            android:id="@+id/tv_step_desc"
+            tools:text="Description text here"
+            style="@style/tv_step_desc"/>
+    </RelativeLayout>
+    
+</android.support.v7.widget.CardView>

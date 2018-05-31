@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                                 bakeName,
                                 bakeImage,
                                 servings,
-                                totalSteps,
+                                (totalSteps-1),
                                 stepsList,
                                 ingredientsList
                         ));
