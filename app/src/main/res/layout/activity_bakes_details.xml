@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/match_parent"
+    android:fillViewport="true"
     tools:context=".BakesDetailsActivity">
+<android.support.constraint.ConstraintLayout
+    style="@style/width_match_height_wrap">
 
     <TextView
         android:id="@+id/tv_title_ingredients"
@@ -33,3 +37,4 @@
         android:id="@+id/rv_steps_list"
         style="@style/rv_steps_list"/>
 </android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -121,8 +121,11 @@
 
     <style name="rv_steps_list" parent="rv_bakes_details">
         <item name="layout_constraintTop_toBottomOf">@id/tv_title_steps</item>
+        <!--Uncomment below properties and remove scrollview inside activity_bakes_details to enable vertical scroll on steps only-->
+        <!--
         <item name="layout_constraintBottom_toBottomOf">parent</item>
         <item name="android:layout_height">@dimen/rv_steps_list_layout_height</item>
+        -->
         <item name="android:layout_marginBottom">@dimen/rv_steps_list_padding_bottom</item>
     </style>
 
