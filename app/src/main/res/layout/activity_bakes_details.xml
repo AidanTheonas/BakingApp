@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BakesDetailsActivity">
+
+    <TextView
+        android:id="@+id/tv_title_ingredients"
+        android:text="@string/ingredients"
+        style="@style/tv_title_ingredients" />
+
+    <ImageView
+        android:id="@+id/iv_next"
+        android:contentDescription="@string/show_next_ingredient"
+        style="@style/iv_next"/>
+
+    <ImageView
+        android:id="@+id/iv_previous"
+        android:contentDescription="@string/show_next_ingredient"
+        style="@style/iv_previous"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_ingredients_list"
+        style="@style/rv_ingredients_list"/>
+
+    <TextView
+        android:id="@+id/tv_title_steps"
+        android:text="@string/steps"
+        style="@style/tv_title_steps" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_steps_list"
+        style="@style/rv_steps_list"/>
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/ingredients_card_view_margin"
+    style="@style/width_match_height_wrap">
+
+    <RelativeLayout
+       style="@style/width_match_height_wrap">
+
+        <TextView
+            android:id="@+id/tv_ingredient"
+            style="@style/tv_ingredient"
+            tools:text="Ingredient description" />
+
+        <TextView
+            android:id="@+id/tv_measure_quantity"
+            style="@style/tv_measure_quantity"
+            tools:text="2 Tea spoons" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

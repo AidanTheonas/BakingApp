@@ -3,4 +3,13 @@
     <dimen name="bakes_list_8dp_margin">8dp</dimen>
     <dimen name="bake_name_text_size">20sp</dimen>
     <dimen name="bakes_list_total_ingredients_text_size">14sp</dimen>
+    <dimen name="ingredients_card_view_margin">8dp</dimen>
+    <dimen name="ingredient_tv_padding">8dp</dimen>
+    <dimen name="tv_ingredient_text_size">18sp</dimen>
+    <dimen name="tv_measure_quantity_drawable_padding">8dp</dimen>
+    <dimen name="tv_measure_quantity_text_size">14sp</dimen>
+    <dimen name="tv_title_margin">8dp</dimen>
+    <dimen name="tv_title_text_size">18sp</dimen>
+    <dimen name="tv_measure_quantity_padding">8dp</dimen>
+    <dimen name="tv_measure_quantity_min_width">100dp</dimen>
 </resources>

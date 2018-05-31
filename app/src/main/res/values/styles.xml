@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -61,6 +61,89 @@
     <style name="tv_servings" parent="bakes_extra_info">
         <item name="layout_constraintTop_toBottomOf">@id/tv_total_steps</item>
         <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
+    <style name="pb_loading" parent="Base.Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:indeterminate">true</item>
+        <item name="android:layout_margin">@dimen/bakes_list_8dp_margin</item>
+    </style>
+
+    <style name="tv_title" parent="width_match_height_wrap">
+        <item name="android:padding">@dimen/tv_title_margin</item>
+        <item name="android:layout_margin">@dimen/tv_title_margin</item>
+        <item name="android:textColor">@color/colorTextIcons</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/tv_title_text_size</item>
+    </style>
+
+    <style name="tv_title_ingredients" parent="tv_title">
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+    </style>
+
+    <style name="iv_next" parent="wrap_contents">
+        <item name="android:src">@drawable/ic_next_on_list</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">@id/tv_title_ingredients</item>
+        <item name="layout_constraintBottom_toBottomOf">@id/tv_title_ingredients</item>
+        <item name="android:layout_margin">@dimen/tv_title_margin</item>
+        <item name="android:padding">@dimen/tv_title_margin</item>
+    </style>
+
+    <style name="iv_previous" parent="wrap_contents">
+        <item name="android:src">@drawable/ic_previous_on_list</item>
+        <item name="layout_constraintEnd_toStartOf">@id/iv_next</item>
+        <item name="layout_constraintTop_toTopOf">@id/tv_title_ingredients</item>
+        <item name="layout_constraintBottom_toBottomOf">@id/tv_title_ingredients</item>
+        <item name="android:layout_margin">@dimen/tv_title_margin</item>
+        <item name="android:padding">@dimen/tv_title_margin</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
+    <style name="rv_bakes_details" parent="width_match_height_wrap">
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+    </style>
+
+    <style name="rv_ingredients_list" parent="rv_bakes_details">
+        <item name="layout_constraintTop_toBottomOf">@id/tv_title_ingredients</item>
+    </style>
+
+    <style name="tv_title_steps" parent="tv_title">
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toBottomOf">@id/rv_ingredients_list</item>
+        <item name="android:layout_marginTop">@dimen/tv_title_margin</item>
+    </style>
+
+    <style name="rv_steps_list" parent="rv_bakes_details">
+        <item name="layout_constraintTop_toBottomOf">@id/tv_title_steps</item>
+    </style>
+
+    <style name="tv_ingredient" parent="width_match_height_wrap">
+        <item name="android:padding">@dimen/ingredient_tv_padding</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">@dimen/tv_ingredient_text_size</item>
+        <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">gravity</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:layout_toRightOf">@id/tv_measure_quantity</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="tv_measure_quantity" parent="wrap_contents">
+        <item name="android:padding">@dimen/tv_measure_quantity_padding</item>
+        <item name="android:textColor">@color/colorTextIcons</item>
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">gravity</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawableTop">@drawable/ic_ingredient</item>
+        <item name="android:drawablePadding">@dimen/tv_measure_quantity_drawable_padding</item>
+        <item name="android:textSize">@dimen/tv_measure_quantity_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minWidth">@dimen/tv_measure_quantity_min_width</item>
     </style>
 
 </resources>

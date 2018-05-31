@@ -1,8 +1,13 @@
 package com.example.aidan.bakingapp;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.res.Configuration;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -10,8 +15,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.aidan.bakingapp.Models.Bakes;
 import com.example.aidan.bakingapp.Adapters.BakesListAdapter;
+import com.example.aidan.bakingapp.Models.Bakes;
 import com.example.aidan.bakingapp.Models.Ingredients;
 import com.example.aidan.bakingapp.Models.Steps;
 
@@ -47,8 +52,15 @@ public class MainActivity extends AppCompatActivity {
     public static final String STEP_VIDEO_URL = "videoURL";
     public static final String STEP_THUMB_URL = "thumbnailURL";
 
+    private static final String BAKES_LIST_STATE = "bakes_list_state";
+
+    public static final String BAKES_EXTRA = "bakes_extra";
+
     @BindView(R.id.rv_bakes_list)
     RecyclerView rvBakesList;
+    @BindView(R.id.pb_loading)
+    ProgressBar pbLoadingProgress;
+
     BakesListAdapter bakesListAdapter;
     List<Bakes> bakesList;
     RequestQueue requestQueue;
@@ -56,22 +68,56 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.bakes));
         }
+        pbLoadingProgress.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
         requestQueue = Volley.newRequestQueue(this);
-        bakesList = new ArrayList<>();
-        bakesListAdapter = new BakesListAdapter(bakesList);
-        rvBakesList.setAdapter(bakesListAdapter);
-        loadBakeList();
+        screenSize();
+        if(savedInstanceState != null) {
+            pbLoadingProgress.setVisibility(View.GONE);
+            bakesListAdapter = savedInstanceState.getParcelable(BAKES_LIST_STATE);
+            rvBakesList.setAdapter(bakesListAdapter);
+        }else {
+            bakesList = new ArrayList<>();
+            bakesListAdapter = new BakesListAdapter(bakesList);
+            rvBakesList.setAdapter(bakesListAdapter);
+            loadBakeList();
+        }
     }
+
+    public void screenSize(){
+        int screenSize = getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK;
+
+        GridLayoutManager gridLayoutManager;
+        switch(screenSize) {
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+                gridLayoutManager = new GridLayoutManager(this, 1);
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_SMALL:
+                gridLayoutManager = new GridLayoutManager(this, 1);
+                break;
+            default:
+                gridLayoutManager = new GridLayoutManager(this, 2);
+                break;
+        }
+        rvBakesList.setLayoutManager(gridLayoutManager);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(BAKES_LIST_STATE, bakesListAdapter);
+}
 
     private void loadBakeList() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, dataSourceURL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
+                pbLoadingProgress.setVisibility(View.GONE);
                 try {
                     int totalBakes = response.length();
                     for (int i = 0; i < totalBakes; i++) {
@@ -103,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                             for (int j = 0; j < ingredientsArray.length(); j++) {
                                 JSONObject ingredientsJson = ingredientsArray.getJSONObject(j);
                                 ingredientsList.add(new Ingredients(
-                                        ingredientsJson.optInt(INGREDIENT_QTY),
+                                        ingredientsJson.optString(INGREDIENT_QTY),
                                         ingredientsJson.optString(INGREDIENT_MEASURE),
                                         ingredientsJson.optString(INGREDIENT_DESC)
                                 ));

@@ -5,4 +5,18 @@
     <string name="total_ingredients">Total Ingredients:</string>
     <string name="total_steps">Total steps:</string>
     <string name="servings">Servings:</string>
+    <string name="unknown">Unknown</string>
+    <string name="cups">Cups</string>
+    <string name="cup">Cup</string>
+    <string name="table_spoons">Table spoons</string>
+    <string name="table_spoon">Table spoon</string>
+    <string name="tea_spoons">Tea spoons</string>
+    <string name="tea_spoon">Tea spoon</string>
+    <string name="kilos">Kilos</string>
+    <string name="kilo">Kilo</string>
+    <string name="grams">Grams</string>
+    <string name="gram">Gram</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="steps">Steps</string>
+    <string name="show_next_ingredient">Show next ingredient</string>
 </resources>
