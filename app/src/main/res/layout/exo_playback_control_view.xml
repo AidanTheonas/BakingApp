@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2016 The Android Open Source Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/player_layout">
+
+    <LinearLayout
+        style="@style/player_buttons_layout">
+        <ImageButton android:id="@id/exo_play"
+            android:contentDescription="@string/play_video"
+            style="@style/ExoMediaButton.Play"/>
+
+        <ImageButton android:id="@id/exo_pause"
+            android:contentDescription="@string/pause_video"
+            style="@style/ExoMediaButton.Pause"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+       style="@style/time_bar_layout">
+
+        <TextView android:id="@id/exo_position"
+            tools:text="00:01"
+            style="@style/exo_position_duration"/>
+
+        <com.google.android.exoplayer2.ui.DefaultTimeBar
+            android:id="@id/exo_progress"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="26dp"/>
+
+        <TextView android:id="@id/exo_duration"
+            tools:text="00:20"
+            style="@style/exo_position_duration"/>
+
+    </LinearLayout>
+
+</LinearLayout>

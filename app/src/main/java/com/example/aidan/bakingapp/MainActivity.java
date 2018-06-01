@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,6 +32,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rvBakesList;
     @BindView(R.id.pb_loading)
     ProgressBar pbLoadingProgress;
+    @BindView(R.id.btn_refresh)
+    Button btnRefresh;
 
     BakesListAdapter bakesListAdapter;
     List<Bakes> bakesList;
@@ -71,16 +77,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.bakes));
+            getSupportActionBar().setTitle(getResources().getString(R.string.recipes));
         }
         pbLoadingProgress.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
         requestQueue = Volley.newRequestQueue(this);
         screenSize();
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             pbLoadingProgress.setVisibility(View.GONE);
             bakesListAdapter = savedInstanceState.getParcelable(BAKES_LIST_STATE);
             rvBakesList.setAdapter(bakesListAdapter);
-        }else {
+        } else {
             bakesList = new ArrayList<>();
             bakesListAdapter = new BakesListAdapter(bakesList);
             rvBakesList.setAdapter(bakesListAdapter);
@@ -88,12 +94,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void screenSize(){
+    public void screenSize() {
         int screenSize = getResources().getConfiguration().screenLayout &
                 Configuration.SCREENLAYOUT_SIZE_MASK;
 
         GridLayoutManager gridLayoutManager;
-        switch(screenSize) {
+        switch (screenSize) {
             case Configuration.SCREENLAYOUT_SIZE_NORMAL:
                 gridLayoutManager = new GridLayoutManager(this, 1);
                 break;
@@ -111,9 +117,16 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(BAKES_LIST_STATE, bakesListAdapter);
-}
+    }
+
+    @OnClick(R.id.btn_refresh)
+    void refresh() {
+        loadBakeList();
+    }
 
     private void loadBakeList() {
+        btnRefresh.setVisibility(View.GONE);
+        pbLoadingProgress.setVisibility(View.VISIBLE);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, dataSourceURL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -160,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                                 bakeName,
                                 bakeImage,
                                 servings,
-                                (totalSteps-1),
+                                (totalSteps - 1),
                                 stepsList,
                                 ingredientsList
                         ));
@@ -175,6 +188,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Timber.e(error);
+                        btnRefresh.setVisibility(View.VISIBLE);
+                        pbLoadingProgress.setVisibility(View.GONE);
                     }
                 });
         requestQueue.add(jsonArrayRequest);

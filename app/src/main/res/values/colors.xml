@@ -8,4 +8,10 @@
     <color name="colorTextIcons">#FFFFFF</color>
     <color name="colorSecondaryText">#757575</color>
     <color name="colorDivider">#BDBDBD</color>
+    <color name="playerControlBackground">#DDFF4081</color>
+    <color name="exo_position_duration_text_color">#FFFFFFFF</color>
+    <color name="exo_error_message_background_color">#00000000</color>
+    <color name="black_color">#FF000000</color>
+    <color name="no_video_background">#EC407A</color>
+    <color name="transparentColor">#00000000</color>
 </resources>

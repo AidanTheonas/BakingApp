@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -51,7 +52,7 @@ public class BakesDetailsActivity extends AppCompatActivity {
         rvIngredientsList.setAdapter(ingredientsListAdapter);
 
         List<Steps> stepsList = new ArrayList<>();
-        stepsListAdapter = new StepsListAdapter(stepsList);
+        stepsListAdapter = new StepsListAdapter(stepsList,bakes);
         rvStepsList.setAdapter(stepsListAdapter);
 
         Intent intent = getIntent();
@@ -99,9 +100,25 @@ public class BakesDetailsActivity extends AppCompatActivity {
 
     void generateStepsList(List<Steps> stepsList){
         LinearLayoutManager lmStepsLayout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        stepsListAdapter = new StepsListAdapter(stepsList);
+        stepsListAdapter = new StepsListAdapter(stepsList,bakes);
         rvStepsList.setLayoutManager(lmStepsLayout);
         rvStepsList.setAdapter(stepsListAdapter);
         rvStepsList.setHasFixedSize(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return (super.onOptionsItemSelected(item));
     }
 }

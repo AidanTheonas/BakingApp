@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_parent"
+    tools:context=".VideoPlayerActivity">
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/vw_step_video"
+        style="@style/vw_step_video"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_sixty_percent"
+        style="@style/player_activity_guideline"/>
+
+    <TextView
+        android:id="@+id/tv_step_desc"
+        tools:text="Bake step description shows here"
+        style="@style/tv_step_desc_video_activity"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_ninety_percent"
+        style="@style/player_activity_guideline_2"/>
+
+    <TextView
+        android:id="@+id/tv_step_number"
+        tools:text="Step 1 of 10"
+        style="@style/tv_step_no_video_activity"/>
+
+    <ImageView
+        android:id="@+id/iv_prev"
+        android:contentDescription="@string/show_next_step"
+        android:src="@drawable/ic_previous_on_list"
+        style="@style/iv_prev_step" />
+
+    <ImageView
+        android:id="@+id/iv_next"
+        android:contentDescription="@string/show_previous_step"
+        android:src="@drawable/ic_next_on_list"
+        style="@style/iv_next_step"/>
+
+</android.support.constraint.ConstraintLayout>

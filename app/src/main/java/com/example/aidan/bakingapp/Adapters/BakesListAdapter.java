@@ -123,9 +123,10 @@ public class BakesListAdapter extends RecyclerView.Adapter<BakesListAdapter.Bake
         @OnClick(R.id.cl_container)
         public void openMoreDetailsActivity(){
             Bakes bakes = bakesList.get(getAdapterPosition());
-            Intent bakesDetailsExtra = new Intent(context, BakesDetailsActivity.class);
-            bakesDetailsExtra.putExtra(BAKES_EXTRA, bakes);
-            context.startActivity(bakesDetailsExtra);
+            Intent intent = new Intent(context, BakesDetailsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.putExtra(BAKES_EXTRA, bakes);
+            context.startActivity(intent);
         }
     }
 }

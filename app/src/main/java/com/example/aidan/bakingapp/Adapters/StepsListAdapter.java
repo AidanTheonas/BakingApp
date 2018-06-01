@@ -1,6 +1,8 @@
 package com.example.aidan.bakingapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +12,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.aidan.bakingapp.Models.Bakes;
 import com.example.aidan.bakingapp.Models.Steps;
 import com.example.aidan.bakingapp.R;
+import com.example.aidan.bakingapp.VideoPlayerActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,9 +30,13 @@ import static com.example.aidan.bakingapp.Helpers.Helpers.getStepIcon;
 public class StepsListAdapter extends RecyclerView.Adapter<StepsListAdapter.StepsListViewHolder> {
     private List<Steps> stepsList;
     private Context context;
+    private Bakes bakes;
+    public static final String STEPS_EXTRA = "bakes_steps_extra";
+    public static final String SELECTED_POSITION_EXTRA = "selected_bake_step_extra";
 
-    public StepsListAdapter(List<Steps> stepsList) {
+    public StepsListAdapter(List<Steps> stepsList,Bakes bakes) {
         this.stepsList = stepsList;
+        this.bakes = bakes;
     }
 
     @NonNull
@@ -83,12 +92,13 @@ public class StepsListAdapter extends RecyclerView.Adapter<StepsListAdapter.Step
 
         @OnClick(R.id.cv_steps)
         void openVideo(){
-            int position = Integer.parseInt(cvSteps.getTag().toString());
-            Steps clickedStep = stepsList.get(position);
-            if(clickedStep.getVideoUrl().trim().equals("")){
-                Toast.makeText(context, R.string.video_not_available,Toast.LENGTH_LONG).show();
-            }else{
-                Toast.makeText(context, clickedStep.getVideoUrl(),Toast.LENGTH_LONG).show();
+            if(bakes != null) {
+                int position = Integer.parseInt(cvSteps.getTag().toString());
+                Intent intent = new Intent(context, VideoPlayerActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra(STEPS_EXTRA, bakes);
+                intent.putExtra(SELECTED_POSITION_EXTRA, position);
+                context.startActivity(intent);
             }
         }
     }

@@ -21,12 +21,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BakesDetailsActivity"
+        <activity
+            android:name=".BakesDetailsActivity"
             android:parentActivityName=".MainActivity"
-            tools:ignore="UnusedAttribute">
+            tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+        </activity>
+
+        <receiver android:name=".BakingAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/baking_app_widget_info" />
+        </receiver>
+
+        <activity android:name=".VideoPlayerActivity"
+            android:parentActivityName=".BakesDetailsActivity"
+            tools:targetApi="jelly_bean">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BakesDetailsActivity" />
         </activity>
     </application>
 
