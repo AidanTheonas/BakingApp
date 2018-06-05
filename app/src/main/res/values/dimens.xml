@@ -26,4 +26,10 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->
     <dimen name="widget_margin">8dp</dimen>
     <dimen name="exo_error_message_padding">16dp</dimen>
+    <dimen name="widget_title_text_size">24sp</dimen>
+    <dimen name="widget_title_padding">8dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="widget_bake_title_text_size">20sp</dimen>
+    <dimen name="widget_ingredients_text_size">16sp</dimen>
+    <dimen name="tv_no_ingredients_text_size">24sp</dimen>
 </resources>

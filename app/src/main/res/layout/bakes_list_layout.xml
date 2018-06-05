@@ -2,30 +2,31 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/bake_card_style">
-<android.support.constraint.ConstraintLayout
-    android:id="@+id/cl_container"
-    style="@style/width_match_height_wrap">
 
-    <ImageView
-        android:id="@+id/iv_pie_imageview"
-        style="@style/iv_pie_imageview"
-        android:contentDescription="@string/bake_name"/>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_container"
+        style="@style/width_match_height_wrap">
 
-    <TextView
-        android:id="@+id/tv_bake_name"
-        style="@style/tv_bake_name"
-        tools:text="Nutella Pie" />
+        <ImageView
+            android:id="@+id/iv_pie_imageview"
+            style="@style/iv_pie_imageview"
+            android:contentDescription="@string/bake_name" />
 
-    <TextView
-        android:id="@+id/tv_total_steps"
-       style="@style/tv_total_steps"
-        tools:text="@string/total_steps"/>
+        <TextView
+            android:id="@+id/tv_bake_name"
+            style="@style/tv_bake_name"
+            tools:text="Nutella Pie" />
 
-    <TextView
-        android:id="@+id/tv_servings"
-        style="@style/tv_servings"
-        tools:text="@string/servings"/>
+        <TextView
+            android:id="@+id/tv_total_steps"
+            style="@style/tv_total_steps"
+            tools:text="@string/total_steps" />
+
+        <TextView
+            android:id="@+id/tv_servings"
+            style="@style/tv_servings"
+            tools:text="@string/servings" />
 
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

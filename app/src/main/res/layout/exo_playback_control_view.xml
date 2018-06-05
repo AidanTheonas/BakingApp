@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2016 The Android Open Source Project
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -14,34 +13,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/player_layout">
 
-    <LinearLayout
-        style="@style/player_buttons_layout">
-        <ImageButton android:id="@id/exo_play"
-            android:contentDescription="@string/play_video"
-            style="@style/ExoMediaButton.Play"/>
+    <LinearLayout style="@style/player_buttons_layout">
 
-        <ImageButton android:id="@id/exo_pause"
-            android:contentDescription="@string/pause_video"
-            style="@style/ExoMediaButton.Pause"/>
+        <ImageButton
+            android:id="@id/exo_play"
+            style="@style/ExoMediaButton.Play"
+            android:contentDescription="@string/play_video" />
+
+        <ImageButton
+            android:id="@id/exo_pause"
+            style="@style/ExoMediaButton.Pause"
+            android:contentDescription="@string/pause_video" />
 
     </LinearLayout>
 
-    <LinearLayout
-       style="@style/time_bar_layout">
+    <LinearLayout style="@style/time_bar_layout">
 
-        <TextView android:id="@id/exo_position"
-            tools:text="00:01"
-            style="@style/exo_position_duration"/>
+        <TextView
+            android:id="@id/exo_position"
+            style="@style/exo_position_duration"
+            tools:text="00:01" />
 
         <com.google.android.exoplayer2.ui.DefaultTimeBar
             android:id="@id/exo_progress"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="26dp"/>
+            android:layout_height="26dp"
+            android:layout_weight="1" />
 
-        <TextView android:id="@id/exo_duration"
-            tools:text="00:20"
-            style="@style/exo_position_duration"/>
+        <TextView
+            android:id="@id/exo_duration"
+            style="@style/exo_position_duration"
+            tools:text="00:20" />
 
     </LinearLayout>
 

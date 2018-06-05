@@ -6,13 +6,23 @@ import android.os.Parcelable;
 import java.util.List;
 
 public class Bakes implements Parcelable {
-    private String bakeName,bakeImage;
+    public static final Creator<Bakes> CREATOR = new Creator<Bakes>() {
+        @Override
+        public Bakes createFromParcel(Parcel in) {
+            return new Bakes(in);
+        }
+
+        @Override
+        public Bakes[] newArray(int size) {
+            return new Bakes[size];
+        }
+    };
+    private String bakeName, bakeImage;
     private int bakeId, servings, totalSteps;
     private List<Steps> stepsList;
     private List<Ingredients> ingredientsList;
 
-
-    public Bakes(int bakeId, String bakeName,String bakeImage, int servings, int totalSteps,List<Steps> stepsList,List<Ingredients> ingredientsList) {
+    public Bakes(int bakeId, String bakeName, String bakeImage, int servings, int totalSteps, List<Steps> stepsList, List<Ingredients> ingredientsList) {
         this.bakeId = bakeId;
         this.bakeName = bakeName;
         this.bakeImage = bakeImage;
@@ -31,18 +41,6 @@ public class Bakes implements Parcelable {
         stepsList = in.createTypedArrayList(Steps.CREATOR);
         ingredientsList = in.createTypedArrayList(Ingredients.CREATOR);
     }
-
-    public static final Creator<Bakes> CREATOR = new Creator<Bakes>() {
-        @Override
-        public Bakes createFromParcel(Parcel in) {
-            return new Bakes(in);
-        }
-
-        @Override
-        public Bakes[] newArray(int size) {
-            return new Bakes[size];
-        }
-    };
 
     public int getBakeId() {
         return bakeId;

@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,6 +37,9 @@ import static com.example.aidan.bakingapp.Adapters.StepsListAdapter.STEPS_EXTRA;
 
 @SuppressWarnings("StringBufferReplaceableByString")
 public class VideoPlayerActivity extends AppCompatActivity {
+    public static final String PLAYER_USER_AGENT = "bakeStepVideo";
+    private static final String PLAYER_POSITION = "playerPosition";
+    private static long currentPlayerPosition = -1;
     @BindView(R.id.tv_step_desc)
     TextView tvStepDesc;
     @BindView(R.id.tv_step_number)
@@ -55,12 +57,9 @@ public class VideoPlayerActivity extends AppCompatActivity {
     @BindView(R.id.exo_shutter)
     View exoShutter;
     ExoPlayer mExoPlayer = null;
-    public static final String PLAYER_USER_AGENT = "bakeStepVideo";
     List<Steps> stepsList;
     Bakes bakes;
     int totalSteps = 0;
-    private static final String PLAYER_POSITION = "playerPosition";
-    private static long currentPlayerPosition = -1;
     int stepPosition;
 
     @Override
@@ -71,7 +70,6 @@ public class VideoPlayerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (savedInstanceState != null) {
             currentPlayerPosition = savedInstanceState.getLong(PLAYER_POSITION);
-            Log.e("Current position",currentPlayerPosition+"");
         }
         if (intent.hasExtra(STEPS_EXTRA)) {
             bakes = intent.getParcelableExtra(STEPS_EXTRA);
@@ -88,9 +86,9 @@ public class VideoPlayerActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(steps.getShortDescription());
         }
         if (steps.getVideoUrl().trim().equals("")) {
-                pbBuffering.setVisibility(View.GONE);
-                ivNoVideoPlaceholder.setVisibility(View.VISIBLE);
-                exoShutter.setBackgroundColor(getResources().getColor(R.color.no_video_background));
+            pbBuffering.setVisibility(View.GONE);
+            ivNoVideoPlaceholder.setVisibility(View.VISIBLE);
+            exoShutter.setBackgroundColor(getResources().getColor(R.color.no_video_background));
         } else {
             ivNoVideoPlaceholder.setVisibility(View.INVISIBLE);
             exoShutter.setBackgroundColor(getResources().getColor(R.color.black_color));
@@ -120,17 +118,17 @@ public class VideoPlayerActivity extends AppCompatActivity {
                     } else if (playWhenReady) {
                         if (playbackState == Player.STATE_BUFFERING) {
                             pbBuffering.setVisibility(View.VISIBLE);
-                            if(currentPlayerPosition != -1){
+                            if (currentPlayerPosition != -1) {
                                 mExoPlayer.seekTo(currentPlayerPosition);
                                 currentPlayerPosition = -1;
                             }
                         }
                     }
                 }
+
                 @Override
                 public void onPlayerError(ExoPlaybackException error) {
                     super.onPlayerError(error);
-                    Log.e("Error:","tatizo");
                     Timber.d(error);
                 }
             });
@@ -142,9 +140,9 @@ public class VideoPlayerActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.iv_next)
-    void nextStep(){
-        int newPosition = stepPosition+1;
-        if(newPosition >= 0 && newPosition <= (stepsList.size()-1)){
+    void nextStep() {
+        int newPosition = stepPosition + 1;
+        if (newPosition >= 0 && newPosition <= (stepsList.size() - 1)) {
             releasePlayer();
             pvStepVideo.setPlayer(null);
             stepPosition = newPosition;
@@ -153,9 +151,9 @@ public class VideoPlayerActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.iv_prev)
-    void previousStep(){
-        int newPosition = stepPosition-1;
-        if(newPosition >= 0 && newPosition <= (stepsList.size()-1)){
+    void previousStep() {
+        int newPosition = stepPosition - 1;
+        if (newPosition >= 0 && newPosition <= (stepsList.size() - 1)) {
             releasePlayer();
             pvStepVideo.setPlayer(null);
             stepPosition = newPosition;
@@ -166,8 +164,8 @@ public class VideoPlayerActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(mExoPlayer != null)
-        outState.putLong(PLAYER_POSITION, mExoPlayer.getCurrentPosition());
+        if (mExoPlayer != null)
+            outState.putLong(PLAYER_POSITION, mExoPlayer.getCurrentPosition());
     }
 
 

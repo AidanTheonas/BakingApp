@@ -14,9 +14,9 @@
     </style>
 
     <style name="wrap_contents">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-</style>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
     <style name="width_match_height_wrap">
         <item name="android:layout_width">match_parent</item>
@@ -168,6 +168,7 @@
         <item name="android:textSize">@dimen/tv_measure_quantity_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
+
     <style name="tv_measure_quantity" parent="tv_left_desc">
         <item name="android:drawableTop">@drawable/ic_ingredient</item>
         <item name="android:minWidth">@dimen/tv_measure_quantity_min_width</item>
@@ -246,7 +247,7 @@
         <item name="android:layout_gravity">bottom</item>
         <item name="android:layoutDirection" tools:targetApi="jelly_bean_mr1">ltr</item>
         <item name="android:background">@color/playerControlBackground</item>
-       <item name="android:orientation">vertical</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
     <style name="player_buttons_layout" parent="width_match_height_wrap">
@@ -262,12 +263,70 @@
     </style>
 
     <style name="exo_position_duration" parent="wrap_contents">
-       <item name="android:textSize">@dimen/exo_position_duration_text_size</item>
-       <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/exo_position_duration_text_size</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:paddingLeft">@dimen/exo_position_duration_padding</item>
-       <item name="android:paddingRight">@dimen/exo_position_duration_padding</item>
+        <item name="android:paddingRight">@dimen/exo_position_duration_padding</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:textColor">@color/exo_position_duration_text_color</item>
+    </style>
+
+    <style name="app_widget_title" parent="width_match_height_wrap">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:contentDescription">@string/baking_app_ingredients</item>
+        <item name="android:text">@string/app_name</item>
+        <item name="android:textColor">@color/colorTextIcons</item>
+        <item name="android:textSize">@dimen/widget_title_text_size</item>
+        <item name="android:padding">@dimen/widget_title_padding</item>
+        <item name="android:drawablePadding">@dimen/widget_title_padding</item>
+        <item name="android:drawableLeft">@drawable/ic_logo_circular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_alignParentTop">true</item>
+    </style>
+
+    <style name="tv_bake_title" parent="width_match_height_wrap">
+        <item name="android:padding">@dimen/widget_title_padding</item>
+        <item name="android:textSize">@dimen/widget_bake_title_text_size</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/title_background</item>
+    </style>
+
+    <style name="tv_bake_ingredients" parent="width_match_height_wrap">
+        <item name="android:paddingLeft">@dimen/widget_title_padding</item>
+        <item name="android:paddingRight">@dimen/widget_title_padding</item>
+        <item name="android:paddingBottom">@dimen/widget_title_padding</item>
+        <item name="android:textSize">@dimen/widget_ingredients_text_size</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:layout_below">@id/tv_bake_title</item>
+    </style>
+
+    <style name="fab_add_to_widget" parent="wrap_contents">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:src">@drawable/ic_add_white_24dp</item>
+        <item name="android:layout_margin">@dimen/fab_margin</item>
+        <item name="android:tag">0</item>
+    </style>
+
+    <style name="widget_grid_view" parent="match_parent">
+        <item name="android:numColumns">1</item>
+        <item name="android:layout_below">@+id/app_widget_title</item>
+    </style>
+
+    <style name="tv_no_ingredients" parent="wrap_contents">
+        <item name="android:drawableTop">@drawable/ic_plus</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:drawablePadding">@dimen/tv_measure_quantity_drawable_padding</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">@dimen/tv_no_ingredients_text_size</item>
+    </style>
+
+    <style name="iv_remove_ingredient" parent="wrap_contents">
+        <item name="android:src">@drawable/ic_remove_ingredient</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:padding">@dimen/widget_title_padding</item>
     </style>
 
 </resources>

@@ -46,13 +46,13 @@ public class IngredientsListAdapter extends RecyclerView.Adapter<IngredientsList
 
         int drawable = getMeasurementIcon(ingredients.getMeasure());
         int quantity = 0;
-        if(TextUtils.isDigitsOnly(ingredients.getQuantity())){
+        if (TextUtils.isDigitsOnly(ingredients.getQuantity())) {
             quantity = Integer.parseInt(ingredients.getQuantity());
         }
-        String measure = getFullMeasurementString(ingredients.getMeasure(),context, quantity);
+        String measure = getFullMeasurementString(ingredients.getMeasure(), context, quantity);
         String measureString = new StringBuilder().append(ingredients.getQuantity()).append("\n").append(measure).toString();
         holder.tvMeasureQuantity.setText(measureString);
-        holder.tvMeasureQuantity.setCompoundDrawablesWithIntrinsicBounds(0,drawable,0,0);
+        holder.tvMeasureQuantity.setCompoundDrawablesWithIntrinsicBounds(0, drawable, 0, 0);
     }
 
     @Override

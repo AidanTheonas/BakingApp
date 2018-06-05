@@ -3,7 +3,18 @@ package com.example.aidan.bakingapp.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Steps implements Parcelable{
+public class Steps implements Parcelable {
+    public static final Creator<Steps> CREATOR = new Creator<Steps>() {
+        @Override
+        public Steps createFromParcel(Parcel in) {
+            return new Steps(in);
+        }
+
+        @Override
+        public Steps[] newArray(int size) {
+            return new Steps[size];
+        }
+    };
     private int stepId;
     private String shortDescription, fullDescription, videoUrl, thumbnailUrl;
 
@@ -25,18 +36,6 @@ public class Steps implements Parcelable{
         videoUrl = in.readString();
         thumbnailUrl = in.readString();
     }
-
-    public static final Creator<Steps> CREATOR = new Creator<Steps>() {
-        @Override
-        public Steps createFromParcel(Parcel in) {
-            return new Steps(in);
-        }
-
-        @Override
-        public Steps[] newArray(int size) {
-            return new Steps[size];
-        }
-    };
 
     public int getStepId() {
         return stepId;

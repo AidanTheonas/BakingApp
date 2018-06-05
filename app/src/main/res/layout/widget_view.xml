@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/match_parent"
+    android:background="@color/colorTextIcons">
+
+    <TextView
+        android:id="@+id/app_widget_title"
+        style="@style/app_widget_title" />
+
+    <ImageView
+        android:id="@+id/iv_remove_ingredient"
+        style="@style/iv_remove_ingredient"
+        android:contentDescription="@string/remove_ingredient_from_widget" />
+
+    <GridView
+        android:id="@+id/gv_widget_bakes_recipes"
+        style="@style/widget_grid_view" />
+
+
+    <TextView
+        android:id="@+id/tv_no_ingredients"
+        style="@style/tv_no_ingredients"
+        android:text="@string/add_ingredients" />
+
+</RelativeLayout>

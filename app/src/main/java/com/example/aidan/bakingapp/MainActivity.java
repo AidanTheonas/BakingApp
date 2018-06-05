@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -55,18 +53,15 @@ public class MainActivity extends AppCompatActivity {
     public static final String STEP_DESC = "description";
     public static final String STEP_VIDEO_URL = "videoURL";
     public static final String STEP_THUMB_URL = "thumbnailURL";
-
-    private static final String BAKES_LIST_STATE = "bakes_list_state";
-
     public static final String BAKES_EXTRA = "bakes_extra";
-
+    private static final String BAKES_LIST_STATE = "bakes_list_state";
+    public static VolleyIdlingResource volleyIdlingResource;
     @BindView(R.id.rv_bakes_list)
     RecyclerView rvBakesList;
     @BindView(R.id.pb_loading)
     ProgressBar pbLoadingProgress;
     @BindView(R.id.btn_refresh)
     Button btnRefresh;
-
     BakesListAdapter bakesListAdapter;
     List<Bakes> bakesList;
     RequestQueue requestQueue;
@@ -76,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        volleyIdlingResource = new VolleyIdlingResource();
+        volleyIdlingResource.setIsIdleNow(false);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.recipes));
         }
@@ -179,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                         ));
                     }
                     bakesListAdapter.notifyDataSetChanged();
+                    volleyIdlingResource.setIsIdleNow(true);
                 } catch (JSONException e) {
                     Timber.e(e);
                 }

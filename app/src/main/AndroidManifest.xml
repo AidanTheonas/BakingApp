@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +31,9 @@
                 android:value=".MainActivity" />
         </activity>
 
-        <receiver android:name=".BakingAppWidget">
+        <receiver
+            android:name=".Widget.BakingAppWidget"
+            tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -40,13 +43,35 @@
                 android:resource="@xml/baking_app_widget_info" />
         </receiver>
 
-        <activity android:name=".VideoPlayerActivity"
+        <activity
+            android:name=".VideoPlayerActivity"
             android:parentActivityName=".BakesDetailsActivity"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BakesDetailsActivity" />
         </activity>
+
+        <provider
+            android:name=".Models.Providers.generated.IngredientsProvider"
+            android:authorities="com.example.aidan.bakingapp.content.android.provider"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider,InnerclassSeparator" />
+
+        <service
+            android:name=".Widget.WidgetService"
+            tools:ignore="InnerclassSeparator" />
+
+        <service
+            android:name=".Widget.RemoteView"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            tools:ignore="InnerclassSeparator" />
+
+        <service
+            android:name=".Widget.RemoveIngredientService"
+            tools:ignore="InnerclassSeparator" />
+
     </application>
 
 </manifest>

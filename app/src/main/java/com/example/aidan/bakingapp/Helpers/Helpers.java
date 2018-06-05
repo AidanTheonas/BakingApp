@@ -1,15 +1,16 @@
 package com.example.aidan.bakingapp.Helpers;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 
 import com.example.aidan.bakingapp.R;
 
+import java.util.Date;
+
 public class Helpers {
 
-    public static int getMeasurementIcon(String measure){
+    public static int getMeasurementIcon(String measure) {
         int measurementDrawable = R.drawable.ic_ingredient;
-        switch (measure){
+        switch (measure) {
             case "CUP":
                 measurementDrawable = R.drawable.ic_cup;
                 break;
@@ -33,45 +34,45 @@ public class Helpers {
         return measurementDrawable;
     }
 
-    public static String getFullMeasurementString(String measure, Context context , int measureCount){
-        String  measureString= "";
-        switch (measure){
+    public static String getFullMeasurementString(String measure, Context context, int measureCount) {
+        String measureString = "";
+        switch (measure) {
             case "CUP":
-                if(measureCount > 1){
+                if (measureCount > 1) {
                     measureString = context.getString(R.string.cups);
-                }else{
+                } else {
                     measureString = context.getString(R.string.cup);
                 }
                 break;
 
             case "TBLSP":
-                if(measureCount > 1){
+                if (measureCount > 1) {
                     measureString = context.getString(R.string.table_spoons);
-                }else{
+                } else {
                     measureString = context.getString(R.string.table_spoon);
                 }
                 break;
 
             case "TSP":
-                if(measureCount > 1){
+                if (measureCount > 1) {
                     measureString = context.getString(R.string.tea_spoons);
-                }else{
+                } else {
                     measureString = context.getString(R.string.tea_spoon);
                 }
                 break;
 
             case "K":
-                if(measureCount > 1){
+                if (measureCount > 1) {
                     measureString = context.getString(R.string.kilos);
-                }else{
+                } else {
                     measureString = context.getString(R.string.kilo);
                 }
                 break;
 
             case "G":
-                if(measureCount > 1){
+                if (measureCount > 1) {
                     measureString = context.getString(R.string.grams);
-                }else{
+                } else {
                     measureString = context.getString(R.string.gram);
                 }
                 break;
@@ -79,11 +80,15 @@ public class Helpers {
         return measureString;
     }
 
-    public static int getStepIcon(String videoURL){
+    public static int getStepIcon(String videoURL) {
         int stepIcon = R.drawable.ic_no_video;
-        if(!videoURL.trim().equals("")){
+        if (!videoURL.trim().equals("")) {
             stepIcon = R.drawable.ic_video;
         }
         return stepIcon;
+    }
+
+    public static int getCurrentTimeAsInteger() {
+        return (int) (new Date().getTime() / 1000);
     }
 }

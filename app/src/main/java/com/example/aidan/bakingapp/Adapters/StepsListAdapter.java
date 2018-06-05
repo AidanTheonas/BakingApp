@@ -1,8 +1,5 @@
 package com.example.aidan.bakingapp.Adapters;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,14 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.aidan.bakingapp.Fragments.StepItemClicked;
 import com.example.aidan.bakingapp.Models.Bakes;
 import com.example.aidan.bakingapp.Models.Steps;
 import com.example.aidan.bakingapp.R;
-import com.example.aidan.bakingapp.VideoPlayerActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,15 +23,16 @@ import static com.example.aidan.bakingapp.Helpers.Helpers.getStepIcon;
 
 @SuppressWarnings("StringBufferReplaceableByString")
 public class StepsListAdapter extends RecyclerView.Adapter<StepsListAdapter.StepsListViewHolder> {
-    private List<Steps> stepsList;
-    private Context context;
-    private Bakes bakes;
     public static final String STEPS_EXTRA = "bakes_steps_extra";
     public static final String SELECTED_POSITION_EXTRA = "selected_bake_step_extra";
+    private List<Steps> stepsList;
+    private Bakes bakes;
+    private StepItemClicked stepItemClicked;
 
-    public StepsListAdapter(List<Steps> stepsList,Bakes bakes) {
+    public StepsListAdapter(List<Steps> stepsList, Bakes bakes, StepItemClicked stepItemClicked) {
         this.stepsList = stepsList;
         this.bakes = bakes;
+        this.stepItemClicked = stepItemClicked;
     }
 
     @NonNull
@@ -44,7 +40,6 @@ public class StepsListAdapter extends RecyclerView.Adapter<StepsListAdapter.Step
     public StepsListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.steps_layout, parent, false);
-        context = parent.getContext();
         return new StepsListViewHolder(itemView);
     }
 
@@ -91,14 +86,10 @@ public class StepsListAdapter extends RecyclerView.Adapter<StepsListAdapter.Step
         }
 
         @OnClick(R.id.cv_steps)
-        void openVideo(){
-            if(bakes != null) {
+        void openVideo() {
+            if (bakes != null) {
                 int position = Integer.parseInt(cvSteps.getTag().toString());
-                Intent intent = new Intent(context, VideoPlayerActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra(STEPS_EXTRA, bakes);
-                intent.putExtra(SELECTED_POSITION_EXTRA, position);
-                context.startActivity(intent);
+                stepItemClicked.getClickedStepPosition(position);
             }
         }
     }

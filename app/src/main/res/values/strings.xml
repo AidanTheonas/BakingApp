@@ -32,4 +32,14 @@
     <string name="pause_video">Pause video</string>
     <string name="media_player_artwork">Media player artwork</string>
     <string name="sorry_an_error_occurred_check_your_internet_connection_and_tap_to_reload">Sorry! An error occurred, check your internet connection and tap to reload</string>
+    <string name="baking_app_ingredients">Baking App Ingredients</string>
+    <string name="ingredients_added_to_widget">Ingredients added to widget</string>
+    <string name="error_adding_to_widget">Error adding ingredients to widget</string>
+    <string name="add_ingredients">Add Ingredients</string>
+    <string name="remove_ingredient_from_widget">Remove ingredient from widget</string>
+    <string name="ingredients_removed">Ingredients removed from widget</string>
+    <string name="error_removing_ingredients">Error removing ingredients from widget</string>
+    <string name="must_implement_onstep_click">Must implement OnStepClickListener</string>
+    <string name="share">Share</string>
+    <string name="share_ingredients">Share ingredients</string>
 </resources>

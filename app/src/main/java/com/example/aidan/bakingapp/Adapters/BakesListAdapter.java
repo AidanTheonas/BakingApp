@@ -27,17 +27,6 @@ import static com.example.aidan.bakingapp.MainActivity.BAKES_EXTRA;
 
 @SuppressWarnings("StringBufferReplaceableByString")
 public class BakesListAdapter extends RecyclerView.Adapter<BakesListAdapter.BakesListViewHolder> implements Parcelable {
-    private List<Bakes> bakesList;
-    private Context context;
-
-    public BakesListAdapter(List<Bakes> bakesList) {
-        this.bakesList = bakesList;
-    }
-
-    private BakesListAdapter(Parcel in) {
-        bakesList = in.createTypedArrayList(Bakes.CREATOR);
-    }
-
     public static final Creator<BakesListAdapter> CREATOR = new Creator<BakesListAdapter>() {
         @Override
         public BakesListAdapter createFromParcel(Parcel in) {
@@ -49,6 +38,16 @@ public class BakesListAdapter extends RecyclerView.Adapter<BakesListAdapter.Bake
             return new BakesListAdapter[size];
         }
     };
+    private List<Bakes> bakesList;
+    private Context context;
+
+    public BakesListAdapter(List<Bakes> bakesList) {
+        this.bakesList = bakesList;
+    }
+
+    private BakesListAdapter(Parcel in) {
+        bakesList = in.createTypedArrayList(Bakes.CREATOR);
+    }
 
     @NonNull
     @Override
@@ -121,7 +120,7 @@ public class BakesListAdapter extends RecyclerView.Adapter<BakesListAdapter.Bake
         }
 
         @OnClick(R.id.cl_container)
-        public void openMoreDetailsActivity(){
+        public void openMoreDetailsActivity() {
             Bakes bakes = bakesList.get(getAdapterPosition());
             Intent intent = new Intent(context, BakesDetailsActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

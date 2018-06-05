@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_parent"
+    tools:context=".BakesDetailsActivity">
+
+    <ScrollView
+        style="@style/match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <android.support.constraint.ConstraintLayout style="@style/width_match_height_wrap">
+
+            <TextView
+                android:id="@+id/tv_title_ingredients"
+                style="@style/tv_title_ingredients"
+                android:layout_marginTop="8dp"
+                android:text="@string/ingredients" />
+
+            <ImageView
+                android:id="@+id/iv_next"
+                style="@style/iv_next"
+                android:contentDescription="@string/show_next_ingredient" />
+
+            <ImageView
+                android:id="@+id/iv_previous"
+                style="@style/iv_previous"
+                android:contentDescription="@string/show_next_ingredient" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_ingredients_list"
+                style="@style/rv_ingredients_list" />
+
+            <TextView
+                android:id="@+id/tv_title_steps"
+                style="@style/tv_title_steps"
+                android:text="@string/steps" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_steps_list"
+                style="@style/rv_steps_list" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_to_widget"
+        style="@style/fab_add_to_widget" />
+</RelativeLayout>

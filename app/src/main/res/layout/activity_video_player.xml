@@ -6,36 +6,36 @@
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/vw_step_video"
-        style="@style/vw_step_video"/>
+        style="@style/vw_step_video" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_sixty_percent"
-        style="@style/player_activity_guideline"/>
+        style="@style/player_activity_guideline" />
 
     <TextView
         android:id="@+id/tv_step_desc"
-        tools:text="Bake step description shows here"
-        style="@style/tv_step_desc_video_activity"/>
+        style="@style/tv_step_desc_video_activity"
+        tools:text="Bake step description shows here" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_ninety_percent"
-        style="@style/player_activity_guideline_2"/>
+        style="@style/player_activity_guideline_2" />
 
     <TextView
         android:id="@+id/tv_step_number"
-        tools:text="Step 1 of 10"
-        style="@style/tv_step_no_video_activity"/>
+        style="@style/tv_step_no_video_activity"
+        tools:text="Step 1 of 10" />
 
     <ImageView
         android:id="@+id/iv_prev"
+        style="@style/iv_prev_step"
         android:contentDescription="@string/show_next_step"
-        android:src="@drawable/ic_previous_on_list"
-        style="@style/iv_prev_step" />
+        android:src="@drawable/ic_previous_on_list" />
 
     <ImageView
         android:id="@+id/iv_next"
+        style="@style/iv_next_step"
         android:contentDescription="@string/show_previous_step"
-        android:src="@drawable/ic_next_on_list"
-        style="@style/iv_next_step"/>
+        android:src="@drawable/ic_next_on_list" />
 
 </android.support.constraint.ConstraintLayout>
