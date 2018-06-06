@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 
 import static com.example.aidan.bakingapp.Adapters.StepsListAdapter.SELECTED_POSITION_EXTRA;
 import static com.example.aidan.bakingapp.Adapters.StepsListAdapter.STEPS_EXTRA;
+import static com.example.aidan.bakingapp.Fragments.IngredientsStepsFragment.CLICKED_STATE;
 import static com.example.aidan.bakingapp.MainActivity.BAKES_EXTRA;
 
 public class BakesDetailsActivity extends AppCompatActivity implements IngredientsStepsFragment.OnStepClickListener {
@@ -23,6 +24,7 @@ public class BakesDetailsActivity extends AppCompatActivity implements Ingredien
     VideoPlayerFragment videoPlayerFragment;
     FragmentManager fragmentManager;
     private boolean isTab;
+    int clickedPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class BakesDetailsActivity extends AppCompatActivity implements Ingredien
         fragmentManager = getSupportFragmentManager();
         Intent intent = getIntent();
 
-        isTab = findViewById(R.id.fl_video_layout) != null;
+        isTab = getResources().getBoolean(R.bool.isTablet);
         if (intent.hasExtra(BAKES_EXTRA)) {
             bakes = intent.getParcelableExtra(BAKES_EXTRA);
             if (getSupportActionBar() != null) {
@@ -40,7 +42,22 @@ public class BakesDetailsActivity extends AppCompatActivity implements Ingredien
                 getSupportActionBar().setElevation(0);
             }
             initIngredientsStepsFragment();
+
+            if(isTab) {
+                if (savedInstanceState != null) {
+                    clickedPosition = savedInstanceState.getInt(CLICKED_STATE);
+                    updateVideoPlayerFragment(clickedPosition, bakes);
+                } else {
+                    updateVideoPlayerFragment(0, bakes);
+                }
+            }
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(CLICKED_STATE, clickedPosition);
     }
 
     private void initIngredientsStepsFragment() {
@@ -81,6 +98,7 @@ public class BakesDetailsActivity extends AppCompatActivity implements Ingredien
     @Override
     public void onStepClicked(int position) {
         if (isTab) {
+            clickedPosition = position;
             updateVideoPlayerFragment(position, bakes);
         } else {
             Intent intent = new Intent(this, VideoPlayerActivity.class);

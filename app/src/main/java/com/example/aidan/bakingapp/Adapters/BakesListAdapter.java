@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static com.example.aidan.bakingapp.MainActivity.BAKES_EXTRA;
 
@@ -61,6 +59,18 @@ public class BakesListAdapter extends RecyclerView.Adapter<BakesListAdapter.Bake
     @Override
     public void onBindViewHolder(@NonNull BakesListViewHolder holder, int position) {
         Bakes bakes = bakesList.get(position);
+        final int curPos = position;
+
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bakes bakes = bakesList.get(curPos);
+                Intent intent = new Intent(context, BakesDetailsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra(BAKES_EXTRA, bakes);
+                context.startActivity(intent);
+            }
+        });
 
         //Set Content Description for the bake
         holder.ivBakeImage.setContentDescription(bakes.getBakeName());
@@ -103,8 +113,6 @@ public class BakesListAdapter extends RecyclerView.Adapter<BakesListAdapter.Bake
     }
 
     class BakesListViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.cl_container)
-        ConstraintLayout clContainer;
         @BindView(R.id.tv_bake_name)
         TextView tvBakeName;
         @BindView(R.id.tv_total_steps)
@@ -113,19 +121,12 @@ public class BakesListAdapter extends RecyclerView.Adapter<BakesListAdapter.Bake
         TextView tvServings;
         @BindView(R.id.iv_pie_imageview)
         ImageView ivBakeImage;
+        View view;
 
         BakesListViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-        }
-
-        @OnClick(R.id.cl_container)
-        public void openMoreDetailsActivity() {
-            Bakes bakes = bakesList.get(getAdapterPosition());
-            Intent intent = new Intent(context, BakesDetailsActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            intent.putExtra(BAKES_EXTRA, bakes);
-            context.startActivity(intent);
+            this.view = view;
         }
     }
 }

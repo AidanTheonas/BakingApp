@@ -7,9 +7,13 @@
 
     <RelativeLayout style="@style/width_match_height_wrap">
 
-        <TextView
-            android:id="@+id/tv_step_icon"
-            style="@style/tv_step_icon" />
+        <ImageView
+            android:id="@+id/thumbnail_icon"
+            android:contentDescription="@string/step_thumbnail"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_no_video_placeholder"
+            android:scaleType="fitXY"
+            style="@style/width_match_height_wrap"/>
 
         <TextView
             android:id="@+id/tv_right_desc_title"

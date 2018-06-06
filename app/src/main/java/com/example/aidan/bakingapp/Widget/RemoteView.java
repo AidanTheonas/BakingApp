@@ -3,6 +3,7 @@ package com.example.aidan.bakingapp.Widget;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -11,6 +12,7 @@ import com.example.aidan.bakingapp.Models.Providers.IngredientsProvider;
 import com.example.aidan.bakingapp.R;
 
 public class RemoteView extends RemoteViewsService {
+    public static final String RECIPE_EXTRA = "recipe_extra";
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new WidgetRemoteView(this.getApplicationContext());
@@ -74,6 +76,12 @@ public class RemoteView extends RemoteViewsService {
 
             remoteViews.setTextViewText(R.id.tv_bake_title, bakeName);
             remoteViews.setTextViewText(R.id.tv_bake_ingredients, ingredients);
+
+            Bundle extras = new Bundle();
+            extras.putString(RECIPE_EXTRA, bakeName);
+            Intent fillInIntent = new Intent();
+            fillInIntent.putExtras(extras);
+            remoteViews.setOnClickFillInIntent(R.id.tv_bake_title, fillInIntent);
 
             return remoteViews;
         }

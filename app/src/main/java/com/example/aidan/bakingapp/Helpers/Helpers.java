@@ -81,9 +81,9 @@ public class Helpers {
     }
 
     public static int getStepIcon(String videoURL) {
-        int stepIcon = R.drawable.ic_no_video;
+        int stepIcon = R.drawable.ic_no_video_placeholder;
         if (!videoURL.trim().equals("")) {
-            stepIcon = R.drawable.ic_video;
+            stepIcon = R.drawable.ic_video_placeholder;
         }
         return stepIcon;
     }

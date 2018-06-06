@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.allOf;
 
 @RunWith(AndroidJUnit4.class)
 public class BakingAppTest {
-    private static final String[] CAKES = {"Nutella Pie", "Brownies", "Yellow Cake", "Cheesecake"};
+    private static final String SAMPLE_CAKE = "Nutella Pie";
     @Rule
     public IntentsTestRule<MainActivity> mainActivityActivityTestRule = new IntentsTestRule<>(MainActivity.class);
     private IdlingResource idlingResource;
@@ -37,11 +37,9 @@ public class BakingAppTest {
 
     @Test
     public void checkIfTheListIsDisplayedCorrectly() {
-        for (int i = 0; i < CAKES.length; i++) {
             onView(withId(R.id.rv_bakes_list)).check(matches(isDisplayed()));
-            onView(withId(R.id.rv_bakes_list)).perform(RecyclerViewActions.scrollToPosition(i));
-            onView(withText(CAKES[i])).check(matches(isDisplayed()));
-        }
+            onView(withId(R.id.rv_bakes_list)).perform(RecyclerViewActions.scrollToPosition(0));
+            onView(withText(SAMPLE_CAKE)).check(matches(isDisplayed()));
     }
 
     @SuppressWarnings("unchecked")

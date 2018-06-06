@@ -1,8 +1,10 @@
 package com.example.aidan.bakingapp;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +34,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
+
+import static com.example.aidan.bakingapp.Widget.RemoteView.RECIPE_EXTRA;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
     List<Bakes> bakesList;
     RequestQueue requestQueue;
 
+    int clickedWidgetRecipe = -1;
+    String selectedRecipe = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
         pbLoadingProgress.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
         requestQueue = Volley.newRequestQueue(this);
         screenSize();
+        Intent intent = getIntent();
+        if (intent.hasExtra(RECIPE_EXTRA)) {
+            selectedRecipe = intent.getStringExtra(RECIPE_EXTRA);
+        }
         if (savedInstanceState != null) {
             pbLoadingProgress.setVisibility(View.GONE);
             bakesListAdapter = savedInstanceState.getParcelable(BAKES_LIST_STATE);
@@ -137,6 +148,12 @@ public class MainActivity extends AppCompatActivity {
                         String bakeImage = bakesJSONObject.optString(BAKE_IMAGE);
                         int servings = bakesJSONObject.optInt(BAKE_SERVINGS);
                         int totalSteps = 0;
+
+                        if (selectedRecipe != null) {
+                            if (selectedRecipe.trim().equals(bakeName.trim())) {
+                                clickedWidgetRecipe = i;
+                            }
+                        }
                         List<Ingredients> ingredientsList = new ArrayList<>();
                         List<Steps> stepsList = new ArrayList<>();
                         if (bakesJSONObject.has(BAKE_STEPS)) {
@@ -177,6 +194,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                     bakesListAdapter.notifyDataSetChanged();
                     volleyIdlingResource.setIsIdleNow(true);
+                    if (clickedWidgetRecipe >= 0) {
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                rvBakesList.findViewHolderForAdapterPosition(clickedWidgetRecipe).itemView.performClick();
+
+                            }
+                        },100);
+                    }
                 } catch (JSONException e) {
                     Timber.e(e);
                 }

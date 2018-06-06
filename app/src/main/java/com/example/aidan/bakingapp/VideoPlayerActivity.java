@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.aidan.bakingapp.Helpers.GlideApp;
 import com.example.aidan.bakingapp.Models.Bakes;
 import com.example.aidan.bakingapp.Models.Steps;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -39,6 +40,7 @@ import static com.example.aidan.bakingapp.Adapters.StepsListAdapter.STEPS_EXTRA;
 public class VideoPlayerActivity extends AppCompatActivity {
     public static final String PLAYER_USER_AGENT = "bakeStepVideo";
     private static final String PLAYER_POSITION = "playerPosition";
+    private static final String PLAYER_STATE = "playerState";
     private static long currentPlayerPosition = -1;
     @BindView(R.id.tv_step_desc)
     TextView tvStepDesc;
@@ -61,6 +63,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
     Bakes bakes;
     int totalSteps = 0;
     int stepPosition;
+    boolean isPlayWhenReady = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (savedInstanceState != null) {
             currentPlayerPosition = savedInstanceState.getLong(PLAYER_POSITION);
+            isPlayWhenReady = savedInstanceState.getBoolean(PLAYER_STATE);
         }
         if (intent.hasExtra(STEPS_EXTRA)) {
             bakes = intent.getParcelableExtra(STEPS_EXTRA);
@@ -88,6 +92,17 @@ public class VideoPlayerActivity extends AppCompatActivity {
         if (steps.getVideoUrl().trim().equals("")) {
             pbBuffering.setVisibility(View.GONE);
             ivNoVideoPlaceholder.setVisibility(View.VISIBLE);
+            if(!steps.getThumbnailUrl().trim().equals("")){
+                GlideApp.with(getApplicationContext())
+                        .asBitmap()
+                        .load(steps.getThumbnailUrl())
+                        .override(1024,852)
+                        .placeholder(R.drawable.ic_no_video_placeholder_2)
+                        .error(R.drawable.ic_no_video_placeholder_2)
+                        .into(ivNoVideoPlaceholder);
+            }else {
+                ivNoVideoPlaceholder.setImageDrawable(getResources().getDrawable(R.drawable.ic_no_video_placeholder_2));
+            }
             exoShutter.setBackgroundColor(getResources().getColor(R.color.no_video_background));
         } else {
             ivNoVideoPlaceholder.setVisibility(View.INVISIBLE);
@@ -115,7 +130,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
                     super.onPlayerStateChanged(playWhenReady, playbackState);
                     if (playWhenReady && playbackState == Player.STATE_READY) {
                         pbBuffering.setVisibility(View.GONE);
-                    } else if (playWhenReady) {
+                    } else{
                         if (playbackState == Player.STATE_BUFFERING) {
                             pbBuffering.setVisibility(View.VISIBLE);
                             if (currentPlayerPosition != -1) {
@@ -135,7 +150,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
             String userAgent = Util.getUserAgent(this, PLAYER_USER_AGENT);
             MediaSource mediaSource = new ExtractorMediaSource.Factory(new DefaultDataSourceFactory(this, userAgent)).createMediaSource(sourceUri);
             mExoPlayer.prepare(mediaSource);
-            mExoPlayer.setPlayWhenReady(true);
+            mExoPlayer.setPlayWhenReady(isPlayWhenReady);
         }
     }
 
@@ -164,8 +179,10 @@ public class VideoPlayerActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (mExoPlayer != null)
+        if (mExoPlayer != null) {
             outState.putLong(PLAYER_POSITION, mExoPlayer.getCurrentPosition());
+            outState.putBoolean(PLAYER_STATE, mExoPlayer.getPlayWhenReady());
+        }
     }
 
 
@@ -181,22 +198,6 @@ public class VideoPlayerActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         releasePlayer();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (mExoPlayer != null) {
-            mExoPlayer.setPlayWhenReady(false);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mExoPlayer != null) {
-            mExoPlayer.setPlayWhenReady(true);
-        }
     }
 
     @Override

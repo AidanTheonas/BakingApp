@@ -139,6 +139,7 @@
     </style>
 
     <style name="tv_right_desc_title" parent="width_match_height_wrap">
+        <item name="android:layout_below">@+id/thumbnail_icon</item>
         <item name="android:paddingLeft">@dimen/ingredient_tv_padding</item>
         <item name="android:paddingRight">@dimen/ingredient_tv_padding</item>
         <item name="android:textColor">@color/colorSecondaryText</item>
@@ -146,7 +147,6 @@
         <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">gravity</item>
         <item name="android:gravity">center_vertical|start</item>
         <item name="android:textStyle">italic</item>
-        <item name="android:layout_toRightOf">@id/tv_step_icon</item>
     </style>
 
     <style name="tv_ingredient" parent="tv_right_desc">
@@ -154,7 +154,6 @@
     </style>
 
     <style name="tv_step_desc" parent="tv_right_desc">
-        <item name="android:layout_toRightOf">@id/tv_step_icon</item>
         <item name="android:layout_below">@id/tv_right_desc_title</item>
     </style>
 
@@ -174,8 +173,10 @@
         <item name="android:minWidth">@dimen/tv_measure_quantity_min_width</item>
     </style>
 
-    <style name="tv_step_icon" parent="tv_left_desc">
-        <item name="android:drawableTop">@drawable/ic_video</item>
+    <style name="iv_step_icon" parent="tv_left_desc">
+        <item name="android:layout_below">@+id/thumbnail_icon</item>
+        <item name="android:src">@drawable/ic_video</item>
+        <item name="android:scaleType">centerInside</item>
         <item name="android:background">@color/colorTextIcons</item>
     </style>
 

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.aidan.bakingapp.Helpers.GlideApp;
 import com.example.aidan.bakingapp.Models.Bakes;
 import com.example.aidan.bakingapp.Models.Steps;
 import com.example.aidan.bakingapp.R;
@@ -54,6 +55,7 @@ public class VideoPlayerFragment extends Fragment implements Parcelable {
     private static final String PLAYER_POSITION = "playerPosition";
     private static final String BAKES_STATE = "bakes_state";
     private static final String STEP_POSITION_STATE = "step_position_state";
+    private static final String PLAYER_STATE = "playerState";
     private static long currentPlayerPosition = -1;
     @BindView(R.id.tv_step_desc)
     TextView tvStepDesc;
@@ -76,6 +78,7 @@ public class VideoPlayerFragment extends Fragment implements Parcelable {
     Bakes bakes = null;
     int totalSteps = 0;
     int stepPosition;
+    boolean isPlayWhenReady = false;
 
     public VideoPlayerFragment() {
     }
@@ -96,6 +99,7 @@ public class VideoPlayerFragment extends Fragment implements Parcelable {
             currentPlayerPosition = savedInstanceState.getLong(PLAYER_POSITION);
             bakes = savedInstanceState.getParcelable(BAKES_STATE);
             stepPosition = savedInstanceState.getInt(STEP_POSITION_STATE);
+            isPlayWhenReady = savedInstanceState.getBoolean(PLAYER_STATE);
         }
 
         if (bakes != null) {
@@ -119,6 +123,17 @@ public class VideoPlayerFragment extends Fragment implements Parcelable {
         if (steps.getVideoUrl().trim().equals("")) {
             pbBuffering.setVisibility(View.GONE);
             ivNoVideoPlaceholder.setVisibility(View.VISIBLE);
+            if(!steps.getThumbnailUrl().trim().equals("") && getContext() != null){
+                GlideApp.with(getContext())
+                        .asBitmap()
+                        .load(steps.getThumbnailUrl())
+                        .override(1024,852)
+                        .placeholder(R.drawable.ic_no_video_placeholder_2)
+                        .error(R.drawable.ic_no_video_placeholder_2)
+                        .into(ivNoVideoPlaceholder);
+            }else {
+                ivNoVideoPlaceholder.setImageDrawable(getResources().getDrawable(R.drawable.ic_no_video_placeholder_2));
+            }
             exoShutter.setBackgroundColor(getResources().getColor(R.color.no_video_background));
         } else {
             ivNoVideoPlaceholder.setVisibility(View.INVISIBLE);
@@ -147,7 +162,7 @@ public class VideoPlayerFragment extends Fragment implements Parcelable {
                     super.onPlayerStateChanged(playWhenReady, playbackState);
                     if (playWhenReady && playbackState == Player.STATE_READY) {
                         pbBuffering.setVisibility(View.GONE);
-                    } else if (playWhenReady) {
+                    } else{
                         if (playbackState == Player.STATE_BUFFERING) {
                             pbBuffering.setVisibility(View.VISIBLE);
                             if (currentPlayerPosition != -1) {
@@ -167,7 +182,7 @@ public class VideoPlayerFragment extends Fragment implements Parcelable {
             String userAgent = Util.getUserAgent(getContext(), PLAYER_USER_AGENT);
             MediaSource mediaSource = new ExtractorMediaSource.Factory(new DefaultDataSourceFactory(getContext(), userAgent)).createMediaSource(sourceUri);
             mExoPlayer.prepare(mediaSource);
-            mExoPlayer.setPlayWhenReady(true);
+            mExoPlayer.setPlayWhenReady(isPlayWhenReady);
         }
     }
 
@@ -198,8 +213,10 @@ public class VideoPlayerFragment extends Fragment implements Parcelable {
         super.onSaveInstanceState(outState);
         outState.putParcelable(BAKES_STATE, bakes);
         outState.putInt(STEP_POSITION_STATE, stepPosition);
-        if (mExoPlayer != null)
+        if (mExoPlayer != null) {
             outState.putLong(PLAYER_POSITION, mExoPlayer.getCurrentPosition());
+            outState.putBoolean(PLAYER_STATE, mExoPlayer.getPlayWhenReady());
+        }
     }
 
 
@@ -215,22 +232,6 @@ public class VideoPlayerFragment extends Fragment implements Parcelable {
     public void onDestroy() {
         super.onDestroy();
         releasePlayer();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (mExoPlayer != null) {
-            mExoPlayer.setPlayWhenReady(false);
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mExoPlayer != null) {
-            mExoPlayer.setPlayWhenReady(true);
-        }
     }
 
     @Override

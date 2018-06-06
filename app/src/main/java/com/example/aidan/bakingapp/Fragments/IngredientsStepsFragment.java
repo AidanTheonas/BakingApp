@@ -44,6 +44,7 @@ import butterknife.OnClick;
 
 public class IngredientsStepsFragment extends Fragment implements StepItemClicked, Parcelable {
     public static final String BAKES_STATE = "bakes_state";
+    public static final String CLICKED_STATE = "clicked_state";
     public static final Creator<IngredientsStepsFragment> CREATOR = new Creator<IngredientsStepsFragment>() {
         @Override
         public IngredientsStepsFragment createFromParcel(Parcel in) {
@@ -115,6 +116,8 @@ public class IngredientsStepsFragment extends Fragment implements StepItemClicke
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ingredients_steps, container, false);
         ButterKnife.bind(this, view);
+
+        if(getContext() != null)
 
         if (savedInstanceState != null) {
             bakes = savedInstanceState.getParcelable(BAKES_STATE);

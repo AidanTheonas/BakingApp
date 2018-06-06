@@ -42,4 +42,6 @@
     <string name="must_implement_onstep_click">Must implement OnStepClickListener</string>
     <string name="share">Share</string>
     <string name="share_ingredients">Share ingredients</string>
+    <string name="step_thumbnail">Step thumbnail</string>
+    <string name="step_icon">Step icon</string>
 </resources>

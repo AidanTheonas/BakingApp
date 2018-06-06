@@ -25,8 +25,8 @@
             android:id="@+id/exo_no_video"
             style="@style/match_parent"
             android:contentDescription="@string/no_video_for_this_step"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_no_video_placeholder" />
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_no_video_placeholder_2" />
 
         <ProgressBar
             android:id="@+id/exo_buffering"
